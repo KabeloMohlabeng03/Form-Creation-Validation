@@ -5,36 +5,40 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        const usernameInput = document.getElementById('username').value.trim();
-        const emailInput = document.getElementById('email').value.trim();
-        const passwordInput = document.getElementById('password').value;
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
 
         let isValid = true;
-        const messages = [];
+        let messages = [];
 
-        if (usernameInput.length < 3) {
+        // Username validation
+        if (username.length < 3) {
             isValid = false;
-            messages.push('Username must be at least 3 characters');
+            messages.push('Username must be at least 3 characters long.');
         }
 
-        if (!emailInput.includes('@') || !emailInput.includes('.')) {
+        // Email validation
+        if (!email.includes('@') || !email.includes('.')) {
             isValid = false;
-            messages.push('Email is not valid');
+            messages.push('Please enter a valid email address.');
         }
 
-        if (passwordInput.length < 8) {
+        // Password validation
+        if (password.length < 8) {
             isValid = false;
-            messages.push('Password must be at least 8 characters');
+            messages.push('Password must be at least 8 characters long.');
         }
+
+        // Display feedback
+        feedbackDiv.style.display = 'block';
 
         if (isValid) {
-            feedbackDiv.style.color = '#28a745';
             feedbackDiv.textContent = 'Registration successful!';
+            feedbackDiv.style.color = '#28a745';
         } else {
-            feedbackDiv.style.color = '#dc3545';
             feedbackDiv.innerHTML = messages.join('<br>');
+            feedbackDiv.style.color = '#dc3545';
         }
-
-        feedbackDiv.style.display = 'block';
     });
 });
